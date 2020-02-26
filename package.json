@@ -1,0 +1,30 @@
+{
+  "name": "nodetutorial",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon  --exec babel-node --legacy-watch index.js",
+    "dev": "nodemon  --exec babel-node --legacy-watch index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@okta/jwt-verifier": "^1.0.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.10",
+    "mongoose-unique-validator": "^2.0.3",
+    "mymodule": "^1.0.1",
+    "slugify": "^1.3.6"
+  },
+  "description": "",
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "babel-loader": "^8.0.6",
+    "nodemon": "^2.0.2"
+  }
+}
