@@ -9,7 +9,8 @@ class Connection {
         mongoose.set("useFindAndModify", false);
         mongoose.set("useCreateIndex", true);
         mongoose.set("useUnifiedTopology", true);
-        mongoose.connect(url).then(r => console.log("connection up bruv"))
+        mongoose.connect(process.env.MONGODB_URI || url)
+            .then(r => console.log("connection up bruv"))
             .catch(e => console.error(e));
     }
 }
