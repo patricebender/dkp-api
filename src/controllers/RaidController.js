@@ -19,6 +19,11 @@ class RaidController extends Controller {
         return res.status(response.statusCode).send(response);
     }
 
+    async insert(req, res) {
+        console.log(req + " INSERT RAID")
+        return super.insert(req, res);
+    }
+
 
 }
 

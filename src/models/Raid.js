@@ -15,6 +15,10 @@ class Raid {
               type: Date,
               required: true,
             },
+            description: {
+              type: String,
+              required: true
+            },
             registrations: {
                 type: Array,
                 required: false,

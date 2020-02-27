@@ -21,6 +21,7 @@ export default (server) => {
 
     // raids
     server.get('/raids', authenticationRequired, RaidController.getAll);
+    server.post('/raid', authenticationRequired, RaidController.insert);
 
 
     /**
