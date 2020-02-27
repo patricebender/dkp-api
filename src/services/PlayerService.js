@@ -9,10 +9,29 @@ class PlayerService extends Service {
         return super.insert(data);
     }
 
+    async update(user) {
+
+        try {
+            console.log("update: " + JSON.stringify(user));
+            const {mail} = user;
+            let item = await this.model.update({mail: mail}, user, {new: true});
+            return {
+                error: false,
+                statusCode: 202,
+                item
+            };
+        } catch (error) {
+            console.log(error)
+            return {
+                error: true,
+                statusCode: 500,
+            };
+        }
+    }
+
     async get(mail) {
         try {
             let player = await this.model.findOne({mail: mail});
-            console.log(JSON.stringify(player))
             if (!player) {
                 return {
                     error: true,
@@ -27,8 +46,9 @@ class PlayerService extends Service {
             }
         } catch (e) {
             return {
-                error: false,
+                error: true,
                 statusCode: 500,
+                errors: e.errors
             }
         }
 

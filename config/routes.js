@@ -16,6 +16,7 @@ export default (server) => {
     // player
     server.get('/player:mail', authenticationRequired, PlayerController.get);
     server.post('/player', authenticationRequired, PlayerController.insert);
+    server.patch('/player', authenticationRequired, PlayerController.update)
 
     // raids
     server.get('/raids', authenticationRequired, RaidController.getAll);

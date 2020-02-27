@@ -19,6 +19,14 @@ class PlayerController extends Controller {
         return res.status(response.statusCode).send(response);
     }
 
+    async update(req, res) {
+        const user = req.body;
+        let response = await this.service.update(user);
+        return res.status(response.statusCode).send(response);
+    }
+
+
+
 
 }
 
