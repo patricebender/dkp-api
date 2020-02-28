@@ -26,22 +26,18 @@ class Raid {
             bench: {
                 type: Array,
                 required: false,
-                unique: true,
             },
             willAttend: {
                 type: Array,
                 required: false,
-                unique: true,
             },
             declined: {
                 type: Array,
                 required: false,
-                unique: true,
             },
             late: {
                 type: Array,
                 required: false,
-                unique: true,
             }
 
         }, {timestamps: true});
