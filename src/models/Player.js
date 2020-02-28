@@ -34,6 +34,11 @@ class Player {
                 type: Number,
                 required: false,
                 default: 100
+            },
+            dkpHistory: {
+                type: Array,
+                required: false,
+                default: []
             }
         }, {timestamps: true});
 

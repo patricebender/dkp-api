@@ -3,45 +3,29 @@ import Spec from "./categories/Spec"
 import uniqueValidator from "mongoose-unique-validator";
 import Player from "./Player";
 
-class Raid {
+class DkpEntry {
 
     initSchema() {
         const schema = new Schema({
-            dungeonName: {
+            dkpLogType: {
+                type: DkpLogType,
+                required: true,
+            },
+            reason: {
                 type: String,
+                required: true,
+            },
+            dkp: {
+                type: Number,
                 required: true,
             },
             date: {
                 type: Date,
                 required: true,
             },
-            description: {
+            author: {
                 type: String,
-                required: true
-            },
-            registrationDeadline: {
-                type: Date,
                 required: true,
-            },
-            bench: {
-                type: Array,
-                required: false,
-                unique: true,
-            },
-            willAttend: {
-                type: Array,
-                required: false,
-                unique: true,
-            },
-            declined: {
-                type: Array,
-                required: false,
-                unique: true,
-            },
-            late: {
-                type: Array,
-                required: false,
-                unique: true,
             }
 
         }, {timestamps: true});
@@ -57,12 +41,12 @@ class Raid {
             }
         );
         schema.plugin(uniqueValidator);
-        mongoose.model("Raids", schema);
+        mongoose.model("DkpEntry", schema);
     }
 
     getInstance() {
         this.initSchema();
-        return mongoose.model("Raids");
+        return mongoose.model("DkpEntry");
     }
 }
 
