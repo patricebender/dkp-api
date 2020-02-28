@@ -18,7 +18,7 @@ export default (server) => {
     server.get('/player:mail', authenticationRequired, PlayerController.get);
     server.post('/player', authenticationRequired, PlayerController.insert);
     server.patch('/player', authenticationRequired, PlayerController.update);
-    server.patch('/player/dkp:ingameName', authenticationRequired, PlayerController.addDkpEntry);
+    server.patch('/player/dkp:mail', authenticationRequired, PlayerController.addDkpEntry);
 
 
     // raids

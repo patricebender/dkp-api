@@ -3,7 +3,6 @@ import Service from './Service';
 class PlayerService extends Service {
     constructor(model) {
         super(model);
-        this.getBy = this.getBy.bind(this);
         this.appendDkpEntry = this.appendDkpEntry.bind(this);
     }
 
@@ -31,10 +30,10 @@ class PlayerService extends Service {
         }
     }
 
-    async appendDkpEntry(dkpEntry, ingameName) {
+    async appendDkpEntry(dkpEntry, mail) {
         try {
-            console.log("dkp entry add request for: " + JSON.stringify(ingameName));
-            const playerLookup = await this.getBy(ingameName);
+            console.log("dkp entry add request for: " + JSON.stringify(mail));
+            const playerLookup = await this.get(mail);
             if (playerLookup.player) {
                 const player = playerLookup.player;
                 console.log("before: " + player);
@@ -65,30 +64,6 @@ class PlayerService extends Service {
     async get(mail) {
         try {
             let player = await this.model.findOne({mail: mail});
-            if (!player) {
-                return {
-                    error: true,
-                    statusCode: 404,
-                    message: "player not found"
-                }
-            }
-            return {
-                error: false,
-                statusCode: 200,
-                player
-            }
-        } catch (e) {
-            return {
-                error: true,
-                statusCode: 500,
-                errors: e.errors
-            }
-        }
-    }
-
-    async getBy(ingameName) {
-        try {
-            let player = await this.model.findOne({ingameName: ingameName});
             if (!player) {
                 return {
                     error: true,

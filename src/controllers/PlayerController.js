@@ -27,9 +27,9 @@ class PlayerController extends Controller {
     }
 
     async addDkpEntry(req, res) {
-        const ingameName = req.params.ingameName;
+        const mail = req.params.mail;
         const dkpEntry = req.body;
-        let response = await this.service.appendDkpEntry(dkpEntry, ingameName);
+        let response = await this.service.appendDkpEntry(dkpEntry, mail);
         return res.status(response.statusCode).send(response);
     }
 
