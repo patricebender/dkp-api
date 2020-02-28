@@ -20,7 +20,8 @@ class RaidController extends Controller {
     }
 
     async insert(req, res) {
-        console.log(req + " INSERT RAID")
+        console.log(req + " INSERT RAID" + req.body)
+
         return super.insert(req, res);
     }
 
