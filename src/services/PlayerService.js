@@ -3,7 +3,7 @@ import Service from './Service';
 class PlayerService extends Service {
     constructor(model) {
         super(model);
-        this.appendDkpEntry = this.appendDkpEntry.bind(this);
+        this.dkpUpdate = this.dkpUpdate.bind(this);
     }
 
     async insert(data) {
@@ -15,14 +15,14 @@ class PlayerService extends Service {
         try {
             console.log("update: " + JSON.stringify(user));
             const {mail} = user;
-            let item = await this.model.update({mail: mail}, user, {new: true});
+            let item = await this.model.updateOne({mail: mail}, user, {new: true});
             return {
                 error: false,
                 statusCode: 202,
                 item
             };
         } catch (error) {
-            console.log(error)
+            console.log(error);
             return {
                 error: true,
                 statusCode: 500,
@@ -30,17 +30,17 @@ class PlayerService extends Service {
         }
     }
 
-    async appendDkpEntry(dkpEntry, mail) {
+    async dkpUpdate(dkpEntry, mail) {
         try {
-            console.log("dkp entry add request for: " + JSON.stringify(mail));
+            console.log("dkpUpdate: " + JSON.stringify(dkpEntry));
+            const dkp = dkpEntry.dkp;
             const playerLookup = await this.get(mail);
+
             if (playerLookup.player) {
                 const player = playerLookup.player;
-                console.log("before: " + player);
-                player.dkpHistory.push(dkpEntry);
-                player.dkp = player.dkp + dkpEntry.dkp > 800 ? player.dkp = 800 : player.dkp + dkpEntry.dkp < 0 ? 0 : player.dkp + dkpEntry.dkp;
-                console.log("after: " + player);
+                player.dkp = player.dkp + dkp > 800 ? 800 : player.dkp + dkp < 0 ? 0 : player.dkp + dkp;
                 let item = await this.model.update({mail: player.mail}, player, {new: true});
+
                 return {
                     error: false,
                     statusCode: 202,
@@ -52,7 +52,7 @@ class PlayerService extends Service {
                 statusCode: 404,
             };
         } catch (error) {
-            console.log(error)
+            console.log(error);
             return {
                 error: true,
                 statusCode: 500,

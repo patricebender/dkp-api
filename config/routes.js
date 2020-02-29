@@ -2,6 +2,7 @@ import PlayerController from "../src/controllers/PlayerController";
 import OktaJwtVerifier from "@okta/jwt-verifier";
 import Player from "../src/models/Player";
 import RaidController from "../src/controllers/RaidController";
+import DkpController from "../src/controllers/DkpController";
 
 const oktaJwtVerifier = new OktaJwtVerifier({
     issuer: 'https://dev-181790.okta.com/oauth2/default',
@@ -18,7 +19,11 @@ export default (server) => {
     server.get('/player:mail', authenticationRequired, PlayerController.get);
     server.post('/player', authenticationRequired, PlayerController.insert);
     server.patch('/player', authenticationRequired, PlayerController.update);
-    server.patch('/player/dkp:mail', authenticationRequired, PlayerController.addDkpEntry);
+    server.patch('/player/dkp:mail', authenticationRequired, PlayerController.dkpUpdate);
+
+
+    // DKP
+    server.patch('/dkp:mail', authenticationRequired,  DkpController.insert);
 
 
     // raids

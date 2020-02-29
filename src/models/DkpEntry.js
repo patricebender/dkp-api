@@ -1,5 +1,5 @@
 import mongoose, {Schema} from "mongoose";
-import Spec from "./categories/Spec"
+import DkpLogType from "./categories/DkpLogType"
 import uniqueValidator from "mongoose-unique-validator";
 import Player from "./Player";
 
@@ -26,6 +26,10 @@ class DkpEntry {
             author: {
                 type: String,
                 required: true,
+            },
+            player: {
+                type: String,
+                required: true
             }
 
         }, {timestamps: true});
@@ -50,4 +54,4 @@ class DkpEntry {
     }
 }
 
-export default Raid;
+export default DkpEntry;
