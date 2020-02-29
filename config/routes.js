@@ -24,6 +24,7 @@ export default (server) => {
 
     // DKP
     server.patch('/dkp:mail', authenticationRequired,  DkpController.insert);
+    server.get('/dkp/history:mail', authenticationRequired,  DkpController.getAllEntries);
 
 
     // raids

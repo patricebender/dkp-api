@@ -14,6 +14,7 @@ class DkpController extends Controller {
 
     constructor(service) {
         super(service);
+        this.getAllEntries = this.getAllEntries.bind(this);
     }
 
     async getAll(req, res) {
@@ -24,8 +25,14 @@ class DkpController extends Controller {
     async insert(req, res) {
         console.log(req + " INSERT DKP Entry" + req.body);
         const playerResponse = await PlayerController.dkpUpdate(req, res);
-        console.log(playerResponse)
+        console.log(playerResponse);
         return super.insert(req, res);
+    }
+
+    async getAllEntries(req, res) {
+        const mail = req.params.mail;
+        let response = await this.service.getAllForOnePlayer({mail});
+        return res.status(response.statusCode).send(response);
     }
 
 }

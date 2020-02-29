@@ -45,12 +45,12 @@ class DkpEntry {
             }
         );
         schema.plugin(uniqueValidator);
-        mongoose.model("DkpEntry", schema);
+        mongoose.model("DkpEntries", schema);
     }
 
     getInstance() {
         this.initSchema();
-        return mongoose.model("DkpEntry");
+        return mongoose.model("DkpEntries");
     }
 }
 
