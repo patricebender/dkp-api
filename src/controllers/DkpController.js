@@ -31,7 +31,8 @@ class DkpController extends Controller {
 
     async getAllEntries(req, res) {
         const mail = req.params.mail;
-        let response = await this.service.getAllForOnePlayer({mail});
+        const skip = req.params.skip;
+        let response = await this.service.getAllForOnePlayer({mail, skip});
         return res.status(response.statusCode).send(response);
     }
 
