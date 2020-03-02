@@ -27,11 +27,11 @@ class Raid {
                 type: Array,
                 required: false,
             },
-            willAttend: {
+            confirm: {
                 type: Array,
                 required: false,
             },
-            declined: {
+            decline: {
                 type: Array,
                 required: false,
             },

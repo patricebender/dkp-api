@@ -1,6 +1,7 @@
 import mongoose, {Schema} from "mongoose";
 import PlayerClass from "./categories/PlayerClass"
 import Spec from "./categories/Spec"
+import Talent from "./categories/Talents"
 import uniqueValidator from "mongoose-unique-validator";
 
 class Player {
@@ -33,12 +34,18 @@ class Player {
             dkp: {
                 type: Number,
                 required: false,
-                default: 100
+                default: 0
             },
             dkpHistory: {
                 type: Array,
                 required: false,
                 default: []
+            },
+            talent: {
+                type: Talent,
+                required:  false,
+                default: undefined,
+
             }
         }, {timestamps: true});
 

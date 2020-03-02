@@ -12,6 +12,7 @@ class RaidController extends Controller {
 
     constructor(service) {
         super(service);
+        this.insertRegistration = this.insertRegistration.bind(this);
     }
 
     async getAll(req, res) {
@@ -25,6 +26,11 @@ class RaidController extends Controller {
     }
 
 
+   async insertRegistration(req, res) {
+        const {raid, player, registrationType} = req.body;
+        let response = await this.service.registerForRaid(player, raid, registrationType);
+        return res.status(response.statusCode).send(response);
+    }
 }
 
 export default new RaidController(raidService);
