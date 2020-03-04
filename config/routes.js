@@ -20,6 +20,7 @@ export default (server) => {
     server.post('/player', authenticationRequired, PlayerController.insert);
     server.patch('/player', authenticationRequired, PlayerController.update);
     server.patch('/player/dkp:mail', authenticationRequired, PlayerController.dkpUpdate);
+    server.delete('/player/:id', authenticationRequired, PlayerController.delete);
 
 
     // DKP
