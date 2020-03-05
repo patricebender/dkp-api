@@ -17,7 +17,7 @@ class Service {
 
         skip = skip ? Number(skip) : 0;
         // TODO Change to scroll pagination in frontend
-        limit = limit ? Number(limit) : 60;
+        limit = limit ? Number(limit) : 100;
 
         delete query.skip;
         delete query.limit;
