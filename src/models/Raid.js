@@ -38,6 +38,10 @@ class Raid {
             late: {
                 type: Array,
                 required: false,
+            },
+            isClosed: {
+                type: Boolean,
+                default: false,
             }
 
         }, {timestamps: true});
