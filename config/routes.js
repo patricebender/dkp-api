@@ -3,6 +3,7 @@ import OktaJwtVerifier from "@okta/jwt-verifier";
 import Player from "../src/models/Player";
 import RaidController from "../src/controllers/RaidController";
 import DkpController from "../src/controllers/DkpController";
+import AuctionController from "../src/controllers/AuctionController";
 
 const oktaJwtVerifier = new OktaJwtVerifier({
     issuer: 'https://dev-181790.okta.com/oauth2/default',
@@ -35,6 +36,14 @@ export default (server) => {
     server.patch('/raid/register', authenticationRequired, RaidController.insertRegistration);
     server.patch('/raid/:id', authenticationRequired, RaidController.update);
     server.delete('/raid:id', authenticationRequired, RaidController.delete);
+
+    // auctions
+    server.get('/auctions', authenticationRequired, AuctionController.getAll);
+    server.post('/auction', authenticationRequired, AuctionController.insert);
+    server.patch('/auction/bid/:id', authenticationRequired, AuctionController.insertBid);
+    server.patch('/auction/close/:id', authenticationRequired, AuctionController.update);
+    server.delete('/auction/:id', authenticationRequired, AuctionController.delete);
+    server.get('/auction/:id', authenticationRequired, AuctionController.get);
 
 
     /**

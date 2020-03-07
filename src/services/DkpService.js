@@ -27,8 +27,11 @@ class DkpService extends Service {
         try {
             let items = await this.model
                 .find({player: mail})
+                .sort({date: -1})
                 .skip(skip)
-                .limit(limit);
+                .limit(limit)
+
+            ;
             let total = await this.model.count();
 
             return {

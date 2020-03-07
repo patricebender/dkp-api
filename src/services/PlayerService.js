@@ -38,7 +38,7 @@ class PlayerService extends Service {
 
             if (playerLookup.player) {
                 const player = playerLookup.player;
-                player.dkp = player.dkp + dkp > 800 ? 800 : player.dkp + dkp < 0 ? 0 : player.dkp + dkp;
+                player.dkp = player.dkp + dkp > 800 ? 800 : player.dkp + dkp;
                 let item = await this.model.update({mail: player.mail}, player, {new: true});
 
                 return {

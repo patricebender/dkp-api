@@ -3,35 +3,28 @@ import DkpLogType from "./categories/DkpLogType"
 import uniqueValidator from "mongoose-unique-validator";
 import Player from "./Player";
 
-class DkpEntry {
+class Auction {
 
     initSchema() {
         const schema = new Schema({
-            dkpLogType: {
-                type: DkpLogType,
+            item: {
+                type: JSON,
                 required: true,
             },
-            reason: {
-                type: String,
-                required: true,
-            },
-            dkp: {
+            minBid: {
                 type: Number,
                 required: true,
             },
-            date: {
-                type: Date,
-                required: true,
+            isClosed: {
+                type: Boolean,
+                required: false,
+                default: false
             },
-            author: {
-                type: String,
-                required: true,
+            bids: {
+                type: Array,
+                required: false,
             },
-            player: {
-                type: String,
-                required: true
-            },
-            item: {
+            winnerBid: {
                 type: JSON,
                 required: false,
             }
@@ -49,13 +42,13 @@ class DkpEntry {
             }
         );
         schema.plugin(uniqueValidator);
-        mongoose.model("DkpEntries", schema);
+        mongoose.model("Auction", schema);
     }
 
     getInstance() {
         this.initSchema();
-        return mongoose.model("DkpEntries");
+        return mongoose.model("Auction");
     }
 }
 
-export default DkpEntry;
+export default Auction;
