@@ -25,8 +25,17 @@ class RaidController extends Controller {
         return super.insert(req, res);
     }
 
+    async update(req, res) {
+        const raid = req.body;
+        const id = raid._id;
+        console.log(raid)
+        let response = await this.service.update(id, raid);
+        return res.status(response.statusCode).send(response);
+    }
 
-   async insertRegistration(req, res) {
+
+
+    async insertRegistration(req, res) {
         const {raid, player, registrationType} = req.body;
         let response = await this.service.registerForRaid(player, raid, registrationType);
         return res.status(response.statusCode).send(response);

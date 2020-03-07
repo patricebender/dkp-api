@@ -33,6 +33,7 @@ export default (server) => {
     server.post('/raid', authenticationRequired, RaidController.insert);
     server.get('/raid/:id', authenticationRequired, RaidController.get);
     server.patch('/raid/register', authenticationRequired, RaidController.insertRegistration);
+    server.patch('/raid/:id', authenticationRequired, RaidController.update);
     server.delete('/raid:id', authenticationRequired, RaidController.delete);
 
 
