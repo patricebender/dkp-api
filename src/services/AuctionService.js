@@ -8,8 +8,42 @@ class AuctionService extends Service {
 
 
     async insert(data) {
-        console.log("insert auction: " + data)
+        console.log("insert auction: " + data);
         return super.insert(data);
+    }
+
+    async removeBid(id, playerMail){
+       try {
+            const auctionLookup = await this.get(id);
+
+            if (auctionLookup.item) {
+                const auction = auctionLookup.item;
+                console.log("vorher: " + auction);
+                auction.bids = auction.bids.filter((otherBid) => {
+                    return otherBid.player.mail !== playerMail;
+                });
+
+                auction.playerMails = auction.playerMails.filter((otherMail) => {
+                    return otherMail !== playerMail;
+                });
+                auction.bidCount = auction.bids.length;
+                console.log("nacher: " + auction);
+                console.log("Yeah gebot gelöscht!");
+
+                return this.update(id, auction);
+            }
+            return {
+                error: true,
+                statusCode: 404,
+                errorMessage: "auction not found"
+            };
+        } catch (error) {
+            console.log(error);
+            return {
+                error: true,
+                statusCode: 500,
+            };
+        }
     }
 
     async insertBid(id, bid) {
@@ -18,12 +52,19 @@ class AuctionService extends Service {
 
             if (auctionLookup.item) {
                 const auction = auctionLookup.item;
-                console.log("vorher: " + auction)
+                console.log("vorher: " + auction);
                 auction.bids = auction.bids.filter((otherBid) => {
                     return otherBid.player._id !== bid.player._id;
                 });
+
+                auction.playerMails = auction.playerMails.filter((otherMail) => {
+                    return otherMail !== bid.player.mail;
+                });
+                // add email of player to check if already bet on item in frontend
+                auction.playerMails.push(bid.player.mail);
                 auction.bids.push(bid);
-                console.log("nacher: " + auction)
+                auction.bidCount = auction.bids.length;
+                console.log("nacher: " + auction);
                 console.log("Yeah gebot eingefügt");
 
                 return this.update(id, auction);
@@ -42,11 +83,10 @@ class AuctionService extends Service {
         }
     }
 
-    async getAll(query) {
+    async getAll(query, isAdmin) {
         let {skip, limit} = query;
 
         skip = skip ? Number(skip) : 0;
-        // TODO Change to scroll pagination in frontend
         limit = limit ? Number(limit) : 100;
 
         delete query.skip;
@@ -61,8 +101,10 @@ class AuctionService extends Service {
         }
 
         try {
+            const exclude = isAdmin ? {} : {bids: 0};
+            console.log(exclude);
             let items = await this.model
-                .find(query)
+                .find(query, exclude)
                 .sort({isClosed: 1})
                 .skip(skip)
                 .limit(limit);

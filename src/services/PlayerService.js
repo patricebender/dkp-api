@@ -1,4 +1,5 @@
 import Service from './Service';
+import DkpEntry from "../models/DkpEntry";
 
 class PlayerService extends Service {
     constructor(model) {
@@ -32,13 +33,16 @@ class PlayerService extends Service {
 
     async dkpUpdate(dkpEntry, mail) {
         try {
-            console.log("dkpUpdate: " + JSON.stringify(dkpEntry));
-            const dkp = dkpEntry.dkp;
-            const playerLookup = await this.get(mail);
-
+            console.log("dkpUpdate: " + dkpEntry);
+            const dkp =  parseInt(dkpEntry.dkp);
+            const playerLookup = await this.getByMail(dkpEntry.player);
+            console.log("player lookup: " + JSON.stringify(playerLookup));
             if (playerLookup.player) {
+
                 const player = playerLookup.player;
+                console.log( player.dkp + dkp);
                 player.dkp = player.dkp + dkp > 800 ? 800 : player.dkp + dkp;
+                console.log(playerLookup.player, dkpEntry);
                 let item = await this.model.update({mail: player.mail}, player, {new: true});
 
                 return {
@@ -61,7 +65,7 @@ class PlayerService extends Service {
     }
 
 
-    async get(mail) {
+    async getByMail(mail) {
         try {
             let player = await this.model.findOne({mail: mail});
             if (!player) {

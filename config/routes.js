@@ -17,17 +17,17 @@ const oktaJwtVerifier = new OktaJwtVerifier({
 export default (server) => {
     // player
     server.get('/players', authenticationRequired, PlayerController.getAll);
-    server.get('/player:mail', authenticationRequired, PlayerController.get);
+    server.get('/player/:mail', authenticationRequired, PlayerController.getByMail);
     server.post('/player', authenticationRequired, PlayerController.insert);
     server.patch('/player', authenticationRequired, PlayerController.update);
-    server.patch('/player/dkp:mail', authenticationRequired, PlayerController.dkpUpdate);
+    server.patch('/player/dkp/:mail', authenticationRequired, PlayerController.dkpUpdate);
     server.delete('/player/:id', authenticationRequired, PlayerController.delete);
 
 
     // DKP
-    server.patch('/dkp:mail', authenticationRequired,  DkpController.insert);
+    server.patch('/dkp/:mail', authenticationRequired,  DkpController.insert);
     server.get('/dkp/history/:mail/:skip', authenticationRequired,  DkpController.getAllEntries);
-
+    server.post('/dkp/many', authenticationRequired,  DkpController.insertMany);
 
     // raids
     server.get('/raids', authenticationRequired, RaidController.getAll);
@@ -35,14 +35,15 @@ export default (server) => {
     server.get('/raid/:id', authenticationRequired, RaidController.get);
     server.patch('/raid/register', authenticationRequired, RaidController.insertRegistration);
     server.patch('/raid/:id', authenticationRequired, RaidController.update);
-    server.delete('/raid:id', authenticationRequired, RaidController.delete);
+    server.delete('/raid/:id', authenticationRequired, RaidController.delete);
 
     // auctions
-    server.get('/auctions', authenticationRequired, AuctionController.getAll);
+    server.get('/auctions/:requesterId', authenticationRequired, AuctionController.getAll);
     server.post('/auction', authenticationRequired, AuctionController.insert);
     server.patch('/auction/bid/:id', authenticationRequired, AuctionController.insertBid);
     server.patch('/auction/close/:id', authenticationRequired, AuctionController.update);
     server.delete('/auction/:id', authenticationRequired, AuctionController.delete);
+    server.delete('/auction/:id/bid/:playerMail', authenticationRequired, AuctionController.removeBid);
     server.get('/auction/:id', authenticationRequired, AuctionController.get);
 
 

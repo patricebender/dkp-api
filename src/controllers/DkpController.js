@@ -15,6 +15,7 @@ class DkpController extends Controller {
     constructor(service) {
         super(service);
         this.getAllEntries = this.getAllEntries.bind(this);
+        this.insertMany = this.insertMany.bind(this);
     }
 
     async getAll(req, res) {
@@ -27,6 +28,17 @@ class DkpController extends Controller {
         const playerResponse = await PlayerController.dkpUpdate(req, res);
         console.log(playerResponse);
         return super.insert(req, res);
+    }
+
+    async insertMany(req, res) {
+        console.log(req + " INSERT Many DKP Entries" + req.body);
+        const dkpEntries = req.body;
+        let response = await this.service.insertMany(req.body);
+        console.log(response);
+        for(let dkpEntry of dkpEntries){
+            await PlayerController.dkpUpdateByMail(dkpEntry, dkpEntry.player);
+        }
+        return res.status(response.statusCode).send(response);
     }
 
     async getAllEntries(req, res) {

@@ -23,6 +23,13 @@ class Auction {
             bids: {
                 type: Array,
                 required: false,
+            },bidCount: {
+                type: Number,
+                required: false
+            },playerMails: {
+                type: Array,
+                required: false,
+                default: []
             },
             winnerBid: {
                 type: JSON,
