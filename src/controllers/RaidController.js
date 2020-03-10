@@ -28,7 +28,6 @@ class RaidController extends Controller {
     async update(req, res) {
         const raid = req.body;
         const id = raid._id;
-        console.log(raid)
         let response = await this.service.update(id, raid);
         return res.status(response.statusCode).send(response);
     }
