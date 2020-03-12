@@ -46,6 +46,11 @@ class Player {
                 required:  false,
                 default: undefined,
 
+            },
+            prefersEnglish: {
+                type: Boolean,
+                required: false,
+                default: true
             }
         }, {timestamps: true});
 
