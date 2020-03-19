@@ -25,9 +25,10 @@ class AuctionController extends Controller {
 
     async getAll(req, res) {
         const id = req.params.requesterId;
+        const limit = req.params.limit;
         const playerResponse = await PlayerController.getById(id);
         console.log(playerResponse.item);
-        let response = await this.service.getAll({}, playerResponse.item.isAdmin);
+        let response = await this.service.getAll({limit}, playerResponse.item.isAdmin);
         return res.status(response.statusCode).send(response);
     }
 

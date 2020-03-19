@@ -87,7 +87,7 @@ class AuctionService extends Service {
         let {skip, limit} = query;
 
         skip = skip ? Number(skip) : 0;
-        limit = limit ? Number(limit) : 100;
+        limit = limit ? Number(limit) : 15;
 
         delete query.skip;
         delete query.limit;
@@ -106,6 +106,7 @@ class AuctionService extends Service {
             let items = await this.model
                 .find(query, exclude)
                 .sort({isClosed: 1})
+                .sort({createdAt: -1})
                 .skip(skip)
                 .limit(limit);
             let total = await this.model.count();

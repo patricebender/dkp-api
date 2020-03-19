@@ -39,7 +39,7 @@ export default (server) => {
     server.delete('/raid/:id', authenticationRequired, RaidController.delete);
 
     // auctions
-    server.get('/auctions/:requesterId', authenticationRequired, AuctionController.getAll);
+    server.get('/auctions/:requesterId/:limit', authenticationRequired, AuctionController.getAll);
     server.post('/auction', authenticationRequired, AuctionController.insert);
     server.patch('/auction/bid/:id', authenticationRequired, AuctionController.insertBid);
     server.patch('/auction/close/:id', authenticationRequired, AuctionController.update);
