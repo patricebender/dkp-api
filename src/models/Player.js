@@ -51,9 +51,13 @@ class Player {
                 type: Boolean,
                 required: false,
                 default: true
+            },
+            dkpRank: {
+                type: Number,
+                required: false,
+                default: 0
             }
         }, {timestamps: true});
-
 
         schema.pre(
             "save",

@@ -21,7 +21,7 @@ class PlayerController extends Controller {
         return res.status(response.statusCode).send(response);
     }
 
-    async getById(id){
+    async getById(id) {
         return this.service.get(id);
     }
 
@@ -34,13 +34,35 @@ class PlayerController extends Controller {
     async dkpUpdate(req, res) {
         const mail = req.params.mail;
         const dkpEntry = req.body;
-        this.dkpUpdateByMail(dkpEntry, mail);
+        await this.dkpUpdateByMail(dkpEntry, mail);
+        this.updateDKPRanking();
     }
 
     async dkpUpdateByMail(dkpEntry, mail) {
+
         return await this.service.dkpUpdate(dkpEntry, mail);
     }
 
+    async updateDKPRanking() {
+        let response = await this.service.getAll({});
+        let players = response.data;
+
+        let rank = 1;
+        let currentDkp = 0;
+
+        for (const player of players) {
+            if (player.dkp < currentDkp) {
+                rank += 1;
+            }
+            player.dkpRank = rank;
+            currentDkp = player.dkp;
+            await this.service.update(player);
+        }
+
+        response = await this.service.getAll({});
+         players = response.data;
+         console.log(players);
+    }
 
 
 }

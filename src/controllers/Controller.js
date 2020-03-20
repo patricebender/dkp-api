@@ -10,7 +10,7 @@ class Controller {
     }
 
     async getAll(req, res) {
-        return res.status(200).send(await this.service.getAll(req.query));
+        return res.status(200).send(await this.service.getAll(req.query || {}));
     }
 
     async insert(req, res) {
