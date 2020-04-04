@@ -42,6 +42,9 @@ class Raid {
             isClosed: {
                 type: Boolean,
                 default: false,
+            },raidlead: {
+                type: String,
+                default: "",
             }
 
         }, {timestamps: true});

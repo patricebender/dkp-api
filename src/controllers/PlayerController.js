@@ -35,7 +35,6 @@ class PlayerController extends Controller {
         const mail = req.params.mail;
         const dkpEntry = req.body;
         await this.dkpUpdateByMail(dkpEntry, mail);
-        this.updateDKPRanking();
     }
 
     async dkpUpdateByMail(dkpEntry, mail) {

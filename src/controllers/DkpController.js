@@ -27,6 +27,7 @@ class DkpController extends Controller {
         console.log(req + " INSERT DKP Entry" + req.body);
         const playerResponse = await PlayerController.dkpUpdate(req, res);
         console.log(playerResponse);
+        await PlayerController.updateDKPRanking();
         return super.insert(req, res);
     }
 
@@ -38,6 +39,7 @@ class DkpController extends Controller {
         for(let dkpEntry of dkpEntries){
             await PlayerController.dkpUpdateByMail(dkpEntry, dkpEntry.player);
         }
+        await PlayerController.updateDKPRanking();
         return res.status(response.statusCode).send(response);
     }
 
