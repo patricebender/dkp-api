@@ -33,6 +33,7 @@ class Service {
         try {
             let items = await this.model
                 .find(query)
+                .sort({createdAt: -1})
                 .skip(skip)
                 .limit(limit);
             let total = await this.model.count();
