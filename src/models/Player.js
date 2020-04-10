@@ -47,6 +47,11 @@ class Player {
                 default: undefined,
 
             },
+            isRaidlead: {
+              type: Boolean,
+              required: false,
+              default: false
+            },
             prefersEnglish: {
                 type: Boolean,
                 required: false,
