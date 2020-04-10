@@ -42,11 +42,13 @@ class Raid {
             isClosed: {
                 type: Boolean,
                 default: false,
-            },raidlead: {
-                type: String,
-                default: "",
+            },raidCreator: {
+                type: JSON,
+                required: false
+            },raidLead: {
+                type: JSON,
+                required: false
             }
-
         }, {timestamps: true});
 
         schema.pre(
