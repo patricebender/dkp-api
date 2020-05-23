@@ -15,6 +15,10 @@ class Raid {
                 type: Date,
                 required: true,
             },
+            invite: {
+                type: Number,
+                required: false,
+            },
             description: {
                 type: String,
                 required: true
@@ -42,8 +46,12 @@ class Raid {
             isClosed: {
                 type: Boolean,
                 default: false,
-            },raidlead: {
-                type: String,
+            },raidLead: {
+                type: JSON,
+                default: "",
+            },
+            raidCreator: {
+                type: JSON,
                 default: "",
             }
 
