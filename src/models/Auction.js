@@ -34,8 +34,11 @@ class Auction {
             winnerBid: {
                 type: JSON,
                 required: false,
+            },
+            createdBy: {
+                type: JSON,
+                required: false,
             }
-
         }, {timestamps: true});
 
         schema.pre(
