@@ -3,5 +3,6 @@ const DkpLogType = {
     Bonus: 'Bonus',
     WonAuction: 'WonAuction',
     Decay: 'Decay',
-    Correction: 'Correction'
+    Correction: 'Correction',
+    Bosskill: 'Bosskill'
 };

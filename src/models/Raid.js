@@ -52,6 +52,9 @@ class Raid {
             },raidLead: {
                 type: JSON,
                 required: false
+            }, hasStarted: {
+                type: Boolean,
+                default: false
             }
         }, {timestamps: true});
 

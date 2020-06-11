@@ -7,8 +7,10 @@ class DkpService extends Service {
     }
 
     async getAllForOnePlayer(query) {
+        console.log("get all DKP Entries for ");
         let {skip, limit, mail} = query;
-        console.log("get all DKP Entries for " + mail);
+        console.log(mail);
+
 
         skip = skip ? Number(skip) : 0;
         limit = limit ? Number(limit) : 10;

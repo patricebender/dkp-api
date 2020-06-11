@@ -36,17 +36,15 @@ class PlayerService extends Service {
 
     async dkpUpdate(dkpEntry, mail) {
         try {
-            console.log("dkpUpdate: " + dkpEntry);
             const dkp =  parseInt(dkpEntry.dkp);
             const playerLookup = await this.getByMail(dkpEntry.player);
-            console.log("player lookup: " + JSON.stringify(playerLookup));
+            console.log("for player: " + JSON.stringify(playerLookup.player));
             if (playerLookup.player) {
 
                 const player = playerLookup.player;
-                console.log( player.dkp + dkp);
-                player.dkp = player.dkp + dkp > 800 ? 800 : player.dkp + dkp;
-                console.log(playerLookup.player, dkpEntry);
+                player.dkp = player.dkp + dkp;
                 let item = await this.model.update({mail: player.mail}, player, {new: true});
+                console.log("new dkp count: " + player.dkp);
 
                 return {
                     error: false,

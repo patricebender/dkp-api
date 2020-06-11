@@ -24,9 +24,8 @@ class DkpController extends Controller {
     }
 
     async insert(req, res) {
-        console.log(req + " INSERT DKP Entry" + req.body);
-        const playerResponse = await PlayerController.dkpUpdate(req, res);
-        console.log(playerResponse);
+        console.log("INSERT DKP Entry: " + JSON.stringify(req.body));
+        await PlayerController.dkpUpdate(req, res);
         await PlayerController.updateDKPRanking();
         return super.insert(req, res);
     }

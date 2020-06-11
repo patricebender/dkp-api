@@ -36,11 +36,6 @@ class Player {
                 required: false,
                 default: 0
             },
-            dkpHistory: {
-                type: Array,
-                required: false,
-                default: []
-            },
             talent: {
                 type: Talent,
                 required:  false,

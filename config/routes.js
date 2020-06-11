@@ -41,6 +41,8 @@ export default (server) => {
     // auctions
     server.get('/auctions/:requesterId/:limit', authenticationRequired, AuctionController.getAll);
     server.post('/auction', authenticationRequired, AuctionController.insert);
+    server.post('/auctions', authenticationRequired, AuctionController.insertMany);
+
     server.patch('/auction/bid/:id', authenticationRequired, AuctionController.insertBid);
     server.patch('/auction/close/:id', authenticationRequired, AuctionController.update);
     server.delete('/auction/:id', authenticationRequired, AuctionController.delete);
